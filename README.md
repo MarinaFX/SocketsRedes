@@ -48,10 +48,9 @@ tabela de roteamento para os roteadores vizinhos. A mensagem consiste em uma lis
 endereços IP’s em formato string. Por exemplo, se a tabela for:
 
 IP | Métrica | Saída
---------------------
+-- | ------- | --------
 192.168.1.2 | 1 | 192.168.1.1
 192.168.1.3 | 1 | 192.168.1.1
---------------------
 
 A mensagem enviada será:
 
