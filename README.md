@@ -82,7 +82,6 @@ A figura abaixo ilustra 4 roteadores e suas respectivas tabelas de roteamento de
 algumas iterações para troca de tabelas. As flechas indicam roteadores vizinhos.
 
 ![Topologia](SocketsRedes/Topologia.png)
-Format: ![Alt Text](url)
 
 #### Considerações sobre a implementação
 A aplicação deve ser multithread, ou seja, devem existir ao menos duas threads: uma para
