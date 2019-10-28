@@ -81,7 +81,7 @@ Ou seja, apenas um ponto de exclamação para anunciar sua entrada.
 A figura abaixo ilustra 4 roteadores e suas respectivas tabelas de roteamento depois de
 algumas iterações para troca de tabelas. As flechas indicam roteadores vizinhos.
 
-![Topologia](C:\Users\Marii\Desktop\AcademicalLife\PUCRS\Semestres\Quarto\ComputerNetworkFundamentals\T2\roteador\Topologia.png)
+![Topologia](SocketsRedes/Topologia.png)
 Format: ![Alt Text](url)
 
 #### Considerações sobre a implementação
