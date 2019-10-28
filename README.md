@@ -72,7 +72,7 @@ rota pré-configurada, deverá anunciar-se para os vizinhos.
 
 A mensagem enviada será:
 
-!
+`!`
 
 Ou seja, apenas um ponto de exclamação para anunciar sua entrada.
 
@@ -82,7 +82,6 @@ A figura abaixo ilustra 4 roteadores e suas respectivas tabelas de roteamento de
 algumas iterações para troca de tabelas. As flechas indicam roteadores vizinhos.
 
 ![Topologia](/Topologia.jpg)
-Format: ![Alt Text](url)
 
 #### Considerações sobre a implementação
 A aplicação deve ser multithread, ou seja, devem existir ao menos duas threads: uma para
