@@ -81,7 +81,7 @@ Ou seja, apenas um ponto de exclamação para anunciar sua entrada.
 A figura abaixo ilustra 4 roteadores e suas respectivas tabelas de roteamento depois de
 algumas iterações para troca de tabelas. As flechas indicam roteadores vizinhos.
 
-![Topologia](C:\Users\Marii\Desktop\AcademicalLife\PUCRS\Semestres\Quarto\ComputerNetworkFundamentals\T2\roteador/Topologia.png)
+![GitHub Logo](/images/logo.png)
 Format: ![Alt Text](url)
 
 #### Considerações sobre a implementação
@@ -91,7 +91,7 @@ roteamento para os vizinhos a cada 10 segundos, ou quando a mesma for alterada.
 
 Os endereços IP dos roteadores vizinho devem ser informados no arquivo denominado
 IPVizinhos.txt (um por linha), conforme implementação de referência.
-
+:'
 A interoperabilidade é uma questão fundamental em redes de computadores. Ela permite
 que equipamentos de diferentes fabricantes operem em harmonia na rede. Para isso, as
 especificações dos protocolos devem ser rigidamente implementadas. Espera-se neste trabalho,
