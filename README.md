@@ -105,10 +105,11 @@ anúncio de rotas devem ser enviadas para a porta 5000 do roteador vizinho.
 
 **Grupos:** Até 3 componentes
 
-**Data de entrega: 08/11
-Obs.: Todos participantes devem estar presentes
+**Data de entrega: 08/11**
 
-Entrega final:**
+**Obs.: Todos participantes devem estar presentes**
+
+**Entrega final:**
 - Código fonte comentado.
 - Descrição do formato do pacote utilizado (token, dados, confirmação).
 
