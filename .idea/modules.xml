@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/roteador.iml" filepath="$PROJECT_DIR$/roteador.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SocketsRedes.iml" filepath="$PROJECT_DIR$/SocketsRedes.iml" />
     </modules>
   </component>
 </project>

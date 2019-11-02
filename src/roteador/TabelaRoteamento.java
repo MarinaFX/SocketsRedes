@@ -1,8 +1,14 @@
 package roteador;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TabelaRoteamento {
     /*Implemente uma estrutura de dados para manter a tabela de roteamento.
@@ -29,13 +35,26 @@ public class TabelaRoteamento {
 
     public void update_tabela(String tabela_s, InetAddress IPAddress) {
         /* Atualize a tabela de rotamento a partir da string recebida. */
+        try ( BufferedReader inputFile = new BufferedReader(new FileReader("IPVizinhos.txt"))) {
+            String ip;
+
+            while( (ip = inputFile.readLine()) != null){
+                ipsDestino.add(ip);
+            }
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Roteador.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         if (!ipsDestino.contains(IPAddress.getHostAddress())){
             ipsDestino.add(IPAddress.getHostAddress());
             addMetrica();
             mudou();
 
-            //System.out.println(IPAddress.getHostAddress() + ": " + tabela_s);
+            System.out.println(IPAddress.getHostAddress() + ";" + getMetrica() + "*");
         }
     }
 
