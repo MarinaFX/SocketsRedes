@@ -64,30 +64,7 @@ public class MessageSender implements Runnable {
              * vizinho imediatamente.
              */
             try {
-                if (tabela.getEstado()){
-                    tabela_string = tabela.get_tabela_string();
-                    sendData = tabela_string.getBytes();
-
-                    for (String ip : vizinhos) {
-                        try {
-                            IPAddress = InetAddress.getByName(ip);
-                        } catch (UnknownHostException ex) {
-                            Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
-                            continue;
-                        }
-
-                        sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 5000);
-
-                        try {
-                            clientSocket.send(sendPacket);
-                        } catch (IOException ex) {
-                            Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                }
-                else{
-                    Thread.sleep(10000);
-                }
+                Thread.sleep(10000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
             }

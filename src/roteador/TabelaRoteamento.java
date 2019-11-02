@@ -1,14 +1,9 @@
 package roteador;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TabelaRoteamento {
     /*Implemente uma estrutura de dados para manter a tabela de roteamento.
@@ -16,61 +11,101 @@ public class TabelaRoteamento {
      */
 
     //estruturas de dados para armazenar as informações da tabela de roteamento
-    private List<String> ipsDestino; //lista de ips de destino
-    private List<String> ipsSaida;   //lista de ips de saida
-    private int metrica;             //variavel contendo o valor da metrica
-    private boolean estado = false;
-    //estado = true -> tabela foi alterada
-    //estado = false -> tabela não foi alterada
+    private List<String> tabelaCompleta;
+    private List<String> ipsDestino;    //lista de ips de destino
+    private List<String> ipsSaida;      //lista de ips de saida
+    private int metrica;                //variavel contendo o valor da metrica
 
     /**
      * alocando as variáveis na memória e inicializando a metrica durante a execução do construtor da classe
      */
     public TabelaRoteamento() {
+        tabelaCompleta = new ArrayList<>();
         ipsSaida = new ArrayList<>();
         ipsDestino = new ArrayList<>();
         metrica = 0;
     }
 
+    private String converteStringTabela(String tabelaS) {
+        String ipTabelaS = tabelaS;
+
+        String[] ipComMetricaTabRec = ipTabelaS.split("\\*");
+        String[] ipSemMetricaTabRec = ipTabelaS.split(";");
+
+        System.out.println("split -> ips com metrica");
+        for (int i = 0; i < ipComMetricaTabRec.length; i++) {
+            System.out.println(ipComMetricaTabRec[i]);
+        }
+
+        System.out.println("split -> ips sem metrica");
+
+        for (int i = 0; i < ipSemMetricaTabRec.length; i++) {
+            System.out.println(ipSemMetricaTabRec[i]);
+        }
+
+
+        System.out.println("fim converteStringTabela()");
+
+        return new String("flemis");
+    }
+
+    private void testeFunction(){
+        String ipTabelaS = "*192.168.1.2;1*192.168.1.3;1";
+
+        String[] ipComMetricaTabRec = ipTabelaS.split("\\*");
+
+        System.out.println("split -> ips com metrica");
+        for (int i = 0; i < ipComMetricaTabRec.length; i++) {
+            if (!ipComMetricaTabRec[i].equals("")) {
+                tabelaCompleta.add(ipComMetricaTabRec[i]);
+                System.out.println(ipComMetricaTabRec[i]);
+            }
+        }
+
+        String[] ipSemMetricaTabRec = Arrays.asList(ipComMetricaTabRec).toString().split(";");
+
+        System.out.println("split -> ips sem metrica");
+
+        for (int i = 0; i < ipSemMetricaTabRec.length; i++) {
+            System.out.println(ipSemMetricaTabRec[i]);
+        }
+
+        System.out.println("fim testeFunction()");
+    }
+
 
     public void update_tabela(String tabela_s, InetAddress IPAddress) {
         /* Atualize a tabela de rotamento a partir da string recebida. */
-        try ( BufferedReader inputFile = new BufferedReader(new FileReader("IPVizinhos.txt"))) {
-            String ip;
+        String ipTabelaS = tabela_s;
+        ipTabelaS = ipTabelaS.trim();
 
-            while( (ip = inputFile.readLine()) != null){
-                ipsDestino.add(ip);
-            }
+        testeFunction();
 
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Roteador.class.getName()).log(Level.SEVERE, null, ex);
-            return;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (!ipsDestino.contains(IPAddress.getHostAddress())){
+        /*if (ipTabelaS.equals("!")) {
             ipsDestino.add(IPAddress.getHostAddress());
-            addMetrica();
-            mudou();
-
-            System.out.println(IPAddress.getHostAddress() + ";" + getMetrica() + "*");
-        }
+            System.out.println("IP " + IPAddress.getHostAddress() + " adicionando a lista");
+        } else {
+            ipTabelaS = converteStringTabela(tabela_s);
+        }*/
     }
 
     public String get_tabela_string() {
-        naoMudou();
+        StringBuilder tabela_string = new StringBuilder();
 
-        String tabela_string = "*";
+        if (tabelaCompleta.isEmpty()) {
+            tabela_string.append("!");
+        } else {
+            tabela_string.append("*");
 
-        for (String ip : ipsDestino){
-            tabela_string+= ip + ";" + getMetrica() + "*";
+            for (String ip : ipsDestino) {
+                tabela_string.append(ip + ";" + getMetrica() + "*");
+            }
         }
 
         //exemplo de saida: *192.168.1.2;1*192.168.1.3;1
         //                  Ou seja, “*” (asterisco) indica uma tupla, IP de Destino e Métrica. A métrica é separada
         //                  do IP por um “;” (ponto e vírgula).
-        return tabela_string;
+        return tabela_string.toString();
     }
 
     public int getMetrica() {
@@ -88,30 +123,4 @@ public class TabelaRoteamento {
     public List<String> getIpsSaida() {
         return ipsSaida;
     }
-
-
-    /**
-     * Os dois métodos abaixo servem para controle de mundança de estado da tabela.
-     * Seria muito complicado implementar o observer nesse caso, então quando atualizar a
-     * tabela ela irá mudar o estado para que a classe MessageSender seja notificada e
-     * faça o envio do pacote em menos de 10 minutos como especificado no protocolo.
-     *
-     * Quando a função get_tabela é chamada o estado é reinicializado para false, pois a tabela
-     * não mudou e para retornar ao 'loop' de mudança de estado novamente.
-     *
-     * update_tabela() -> mudou() -> enviar pacote de novo -> get_tabela() reinicializa para
-     * o estado novo;
-     */
-    public void mudou() {
-        estado = true;
-    }
-
-    public void naoMudou(){
-        estado = false;
-    }
-
-    public boolean getEstado(){
-        return estado;
-    }
-
 }
