@@ -29,6 +29,7 @@ public class Roteador {
         
         /* Cria instâncias da tabela de roteamento e das threads de envio e recebimento de mensagens. */
         TabelaRoteamento tabela = new TabelaRoteamento();
+<<<<<<< HEAD
         Thread receiver = new Thread(new MessageReceiver(tabela));
         Thread sender = new Thread(new MessageSender(tabela, ip_list));
 
@@ -38,3 +39,12 @@ public class Roteador {
     }
     
 }
+=======
+        Thread sender = new Thread(new MessageReceiver(tabela));
+        Thread receiver = new Thread(new MessageSender(tabela, ip_list));
+        
+        sender.start();
+        receiver.start();
+    }
+}
+>>>>>>> Arrumado alguns erros. Resolver update dentro de 10 segundos
