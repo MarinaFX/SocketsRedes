@@ -1,10 +1,2 @@
-<<<<<<< HEAD
-10.132.245.222
-10.132.254.8
-10.32.161.107
-
-
-=======
 127.0.0.1
 192.168.15.7
->>>>>>> Arrumado alguns erros. Resolver update dentro de 10 segundos

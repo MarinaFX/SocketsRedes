@@ -17,19 +17,18 @@ public class Roteador {
         /* Le arquivo de entrada com lista de IPs dos roteadores vizinhos. */
         try ( BufferedReader inputFile = new BufferedReader(new FileReader("IPVizinhos.txt"))) {
             String ip;
-            
+
             while( (ip = inputFile.readLine()) != null){
                 ip_list.add(ip);
             }
-            
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Roteador.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
-        
+
         /* Cria instâncias da tabela de roteamento e das threads de envio e recebimento de mensagens. */
         TabelaRoteamento tabela = new TabelaRoteamento();
-<<<<<<< HEAD
         Thread receiver = new Thread(new MessageReceiver(tabela));
         Thread sender = new Thread(new MessageSender(tabela, ip_list));
 
@@ -37,14 +36,4 @@ public class Roteador {
         receiver.start();
 
     }
-    
 }
-=======
-        Thread sender = new Thread(new MessageReceiver(tabela));
-        Thread receiver = new Thread(new MessageSender(tabela, ip_list));
-        
-        sender.start();
-        receiver.start();
-    }
-}
->>>>>>> Arrumado alguns erros. Resolver update dentro de 10 segundos
