@@ -24,6 +24,7 @@ public class TabelaRoteamento {
 
         if (tabelaString.equals("!")) {
             Endereco end = new Endereco(IPAddress.getHostAddress(), "1");
+            end.setIpSaida(IPAddress.getHostAddress());
             tabelaRoteamento.add(end);
             modificada = true;
         }
