@@ -31,10 +31,10 @@ public class Roteador {
         TabelaRoteamento tabela = new TabelaRoteamento();
         Thread receiver = new Thread(new MessageReceiver(tabela));
         Thread sender = new Thread(new MessageSender(tabela, ip_list));
-
+        
         sender.start();
         receiver.start();
-
+        
     }
     
 }

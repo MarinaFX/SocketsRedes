@@ -5,94 +5,95 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TabelaRoteamento {
-    /*Implemente uma estrutura de dados para manter a tabela de roteamento.
+    /*Implemente uma estrutura de dados para manter a tabela de roteamento. 
      * A tabela deve possuir: IP Destino, Métrica e IP de Saída.
-     */
+    */
 
-    //estruturas de dados para armazenar as informações da tabela de roteamento
-    private List<String> ipsDestino; //lista de ips de destino
-    private List<String> ipsSaida;   //lista de ips de saida
-    private int metrica;             //variavel contendo o valor da metrica
-    private boolean estado = false;
-    //estado = true -> tabela foi alterada
-    //estado = false -> tabela não foi alterada
+    private List<Endereco> tabelaRoteamento;
+    private boolean modificada;
 
-    /**
-     * alocando as variáveis na memória e inicializando a metrica durante a execução do construtor da classe
-     */
-    public TabelaRoteamento() {
-        ipsSaida = new ArrayList<>();
-        ipsDestino = new ArrayList<>();
-        metrica = 0;
+    public TabelaRoteamento(){
+        tabelaRoteamento = new ArrayList<>();
+        modificada = false;
     }
-
-
-    public void update_tabela(String tabela_s, InetAddress IPAddress) {
+    
+    
+    public void update_tabela(String tabela_s,  InetAddress IPAddress){
         /* Atualize a tabela de rotamento a partir da string recebida. */
 
-        if (!ipsDestino.contains(IPAddress.getHostAddress())){
-            ipsDestino.add(IPAddress.getHostAddress());
-            addMetrica();
-            mudou();
+        if(tabela_s.equals("!")) {
 
-            //System.out.println(IPAddress.getHostAddress() + ": " + tabela_s);
+            Endereco end = new Endereco(IPAddress.toString(),"1");
+            tabelaRoteamento.add(end);
+            modificada = true;
+
+        } else {
+
+            List<Endereco> tabelaRecebida = getTabelaRecebida(tabela_s);
+            addNovasRotas(tabelaRecebida,IPAddress.toString());
+
         }
+
+        System.out.println( IPAddress.getHostAddress() + ": " + tabela_s);
     }
 
-    public String get_tabela_string() {
-        naoMudou();
+    public void addNovasRotas(List<Endereco> tabelaRecebida, String ipSaida) {
 
-        String tabela_string = "*";
+        for(Endereco end : tabelaRecebida) {
 
-        for (String ip : ipsDestino){
-            tabela_string+= ip + ";" + getMetrica() + "*";
+            if(!tabelaRoteamento.contains(end)) {
+                end.setIpSaida(ipSaida);
+                tabelaRoteamento.add(end);
+                modificada = true;
+            }
+
         }
 
-        //exemplo de saida: *192.168.1.2;1*192.168.1.3;1
-        //                  Ou seja, “*” (asterisco) indica uma tupla, IP de Destino e Métrica. A métrica é separada
-        //                  do IP por um “;” (ponto e vírgula).
+    }
+
+    public List<Endereco> getTabelaRecebida(String tabela_s) {
+
+        List<Endereco> tabelaRecebida = new ArrayList<>();
+
+        String[] end1 = tabela_s.split("\\*");
+
+        for(int i=0; i<end1.length; i++) {
+
+            String[] enderecosEmetricas = end1[i].split(";");
+
+            tabelaRecebida.add(new Endereco(enderecosEmetricas[i],enderecosEmetricas[i++]));
+
+        }
+
+        return tabelaRecebida;
+    }
+
+    
+    public String get_tabela_string(){
+
+        String tabela_string = "";
+
+        if(tabelaRoteamento.size() == 0) {
+
+            /* Tabela de roteamento vazia conforme especificado no protocolo */
+            tabela_string = "!";
+
+        } else {
+
+            /* Converta a tabela de rotamento para string, conforme formato definido no protocolo . */
+            StringBuilder sb = new StringBuilder();
+
+            for (Endereco end : tabelaRoteamento) {
+                sb.append(end.toString());
+                sb.append("\n");
+            }
+
+            tabela_string = sb.toString();
+        }
+
         return tabela_string;
     }
+    
 
-    public int getMetrica() {
-        return metrica;
-    }
-
-    public void addMetrica() {
-        metrica++;
-    }
-
-    public List<String> getIpsDestino() {
-        return ipsDestino;
-    }
-
-    public List<String> getIpsSaida() {
-        return ipsSaida;
-    }
-
-
-    /**
-     * Os dois métodos abaixo servem para controle de mundança de estado da tabela.
-     * Seria muito complicado implementar o observer nesse caso, então quando atualizar a
-     * tabela ela irá mudar o estado para que a classe MessageSender seja notificada e
-     * faça o envio do pacote em menos de 10 minutos como especificado no protocolo.
-     *
-     * Quando a função get_tabela é chamada o estado é reinicializado para false, pois a tabela
-     * não mudou e para retornar ao 'loop' de mudança de estado novamente.
-     *
-     * update_tabela() -> mudou() -> enviar pacote de novo -> get_tabela() reinicializa para
-     * o estado novo;
-     */
-    public void mudou() {
-        estado = true;
-    }
-
-    public void naoMudou(){
-        estado = false;
-    }
-
-    public boolean getEstado(){
-        return estado;
-    }
-
+    
 }
