@@ -22,25 +22,36 @@ public class TabelaRoteamento {
         String tabelaString;
         tabelaString = tabela_s.trim();
 
-        //for (Endereco end : tabelaRoteamento){
-            if ((tabelaString.equals("!"))) {
-                Endereco end = new Endereco(IPAddress.getHostAddress(), "1");
-                end.setIpSaida(IPAddress.getHostAddress());
+        if ((tabelaString.equals("!"))) {
+            Endereco end = new Endereco(IPAddress.getHostAddress(), "1");
+            end.setIpSaida(IPAddress.getHostAddress());
+            if (!verificaRepitidos(end)) {
                 tabelaRoteamento.add(end);
                 modificada = true;
-            } else {
-                List<Endereco> tabelaRecebida = getTabelaRecebida(tabelaString);
-                addNovasRotas(tabelaRecebida, IPAddress);
             }
-       // }
+
+        } else {
+            List<Endereco> tabelaRecebida = getTabelaRecebida(tabelaString);
+            addNovasRotas(tabelaRecebida, IPAddress);
+        }
 
         System.out.println(IPAddress.getHostAddress() + ": " + tabela_s);
+    }
+
+    private boolean verificaRepitidos(Endereco endereco) {
+        for (Endereco end : tabelaRoteamento) {
+            if (end.equals(endereco)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void addNovasRotas(List<Endereco> tabelaRecebida, InetAddress IPSaida) {
         int i = 0;
         for (Endereco end : tabelaRecebida) {
-            if((!tabelaRoteamento.isEmpty()) && (!(end.getIp().equals(tabelaRoteamento.get(i).getIp())))) {
+            if ((!tabelaRoteamento.isEmpty()) && (!(end.getIp().equals(tabelaRoteamento.get(i).getIp())))) {
                 end.setIpSaida(IPSaida.getHostAddress());
                 tabelaRoteamento.add(end);
                 modificada = true;
@@ -55,18 +66,15 @@ public class TabelaRoteamento {
         String[] aux = tabela_s.split("\\*");
         List<String> enderecoSemAst = new ArrayList<>(Arrays.asList(aux));
 
-        for(int i=0; i<enderecoSemAst.size(); i++) {
-            if(enderecoSemAst.get(i).equals("") || !(enderecoSemAst.get(i)==null)) {
+        for (int i = 0; i < enderecoSemAst.size(); i++) {
+            if (enderecoSemAst.get(i).equals("") || !(enderecoSemAst.get(i) == null)) {
                 enderecoSemAst.remove(i);
             }
         }
 
         for (int i = 0; i < enderecoSemAst.size(); i++) {
-
-                String[] enderecosEmetricas = enderecoSemAst.get(i).split(";");
-
-                tabelaRecebida.add(new Endereco(enderecosEmetricas[0], enderecosEmetricas[1]));
-
+            String[] enderecosEmetricas = enderecoSemAst.get(i).split(";");
+            tabelaRecebida.add(new Endereco(enderecosEmetricas[0], enderecosEmetricas[1]));
         }
 
         return tabelaRecebida;
@@ -93,12 +101,12 @@ public class TabelaRoteamento {
         return tabela_string;
     }
 
-    public boolean mudou() {
-        return true;
+    public void mudou() {
+        modificada = true;
     }
 
-    public boolean nMudou() {
-        return false;
+    public void nMudou() {
+        modificada = false;
     }
 
     public boolean getEstado() {

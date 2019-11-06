@@ -43,7 +43,7 @@ public class MessageReceiver implements Runnable{
             }
 
             /* Transforma a mensagem em string */
-            String tabela_string = new String( receivePacket.getData());
+            String tabela_string = new String(receivePacket.getData());
 
             /* Obtem o IP de origem da mensagem */
             InetAddress IPAddress = receivePacket.getAddress();
