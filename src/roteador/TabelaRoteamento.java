@@ -2,6 +2,7 @@ package roteador;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TabelaRoteamento {
@@ -39,7 +40,7 @@ public class TabelaRoteamento {
     public void addNovasRotas(List<Endereco> tabelaRecebida, InetAddress IPSaida) {
         int i = 0;
         for (Endereco end : tabelaRecebida) {
-            if (!end.getIp().equals(tabelaRoteamento.get(i).getIp())){
+            if((!tabelaRoteamento.isEmpty()) && (!(end.getIp().equals(tabelaRoteamento.get(i).getIp())))) {
                 end.setIpSaida(IPSaida.getHostAddress());
                 tabelaRoteamento.add(end);
                 modificada = true;
@@ -51,13 +52,21 @@ public class TabelaRoteamento {
     public List<Endereco> getTabelaRecebida(String tabela_s) {
         List<Endereco> tabelaRecebida = new ArrayList<>();
 
-        String[] enderecoSemAst = tabela_s.split("\\*");
+        String[] aux = tabela_s.split("\\*");
+        List<String> enderecoSemAst = new ArrayList<>(Arrays.asList(aux));
 
-        for (int i = 0; i < enderecoSemAst.length; i++) {
-            if (!(enderecoSemAst[i].equals("")) || !(enderecoSemAst[i] == null)) {
-                String[] enderecosEmetricas = enderecoSemAst[i].split(";");
-                tabelaRecebida.add(new Endereco(enderecosEmetricas[0], enderecosEmetricas[1]));
+        for(int i=0; i<enderecoSemAst.size(); i++) {
+            if(enderecoSemAst.get(i).equals("") || !(enderecoSemAst.get(i)==null)) {
+                enderecoSemAst.remove(i);
             }
+        }
+
+        for (int i = 0; i < enderecoSemAst.size(); i++) {
+
+                String[] enderecosEmetricas = enderecoSemAst.get(i).split(";");
+
+                tabelaRecebida.add(new Endereco(enderecosEmetricas[0], enderecosEmetricas[1]));
+
         }
 
         return tabelaRecebida;
