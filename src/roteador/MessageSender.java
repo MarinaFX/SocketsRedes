@@ -24,6 +24,7 @@ public class MessageSender implements Runnable{
         DatagramSocket clientSocket = null;
         byte[] sendData;
         InetAddress IPAddress = null;
+        DatagramPacket sendPacket = null;
 
         /* Cria socket para envio de mensagem */
         try {
@@ -52,7 +53,7 @@ public class MessageSender implements Runnable{
                 }
 
                 /* Configura pacote para envio da menssagem para o roteador vizinho na porta 5000*/
-                DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 5000);
+                sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 6000);
 
                 /* Realiza envio da mensagem. */
                 try {
@@ -67,7 +68,19 @@ public class MessageSender implements Runnable{
              * vizinho imediatamente.
              */
             try {
-                Thread.sleep(10000);
+                int tempoEsperado = 0;
+                while (tempoEsperado < 10000){
+                    if (tabela.getEstado()){
+                        try {
+                            clientSocket.send(sendPacket);
+                            break;
+                        } catch (IOException ex) {
+                            Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    Thread.sleep(1000);
+                    tempoEsperado+=1000;
+                }
             } catch (InterruptedException ex) {
                 Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
             }
