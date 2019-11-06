@@ -54,7 +54,7 @@ public class TabelaRoteamento {
         String[] enderecoSemAst = tabela_s.split("\\*");
 
         for (int i = 0; i < enderecoSemAst.length; i++) {
-            if ((!enderecoSemAst[i].equals("")) || !(enderecoSemAst[i] == null)) {
+            if (!(enderecoSemAst[i].equals("")) || !(enderecoSemAst[i] == null)) {
                 String[] enderecosEmetricas = enderecoSemAst[i].split(";");
                 tabelaRecebida.add(new Endereco(enderecosEmetricas[0], enderecosEmetricas[1]));
             }
