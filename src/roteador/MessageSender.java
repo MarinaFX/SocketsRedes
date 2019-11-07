@@ -1,20 +1,16 @@
 package roteador;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MessageSender implements Runnable{
+public class MessageSender implements Runnable {
     TabelaRoteamento tabela; /*Tabela de roteamento */
     ArrayList<String> vizinhos; /* Lista de IPs dos roteadores vizinhos */
 
-    public MessageSender(TabelaRoteamento t, ArrayList<String> v){
+    public MessageSender(TabelaRoteamento t, ArrayList<String> v) {
         tabela = t;
         vizinhos = v;
     }
@@ -34,7 +30,7 @@ public class MessageSender implements Runnable{
             return;
         }
 
-        while(true){
+        while (true) {
 
             /* Pega a tabela de roteamento no formato string, conforme especificado pelo protocolo. */
             String tabela_string = tabela.get_tabela_string();
@@ -43,7 +39,7 @@ public class MessageSender implements Runnable{
             sendData = tabela_string.getBytes();
 
             /* Anuncia a tabela de roteamento para cada um dos vizinhos */
-            for (String ip : vizinhos){
+            for (String ip : vizinhos) {
                 /* Converte string com o IP do vizinho para formato InetAddress */
                 try {
                     IPAddress = InetAddress.getByName(ip);
@@ -69,23 +65,37 @@ public class MessageSender implements Runnable{
              */
             try {
                 int tempoEsperado = 0;
-                while (tempoEsperado < 10000){
-                    if (tabela.getEstado()){
-                        try {
-                            clientSocket.send(sendPacket);
-                            break;
-                        } catch (IOException ex) {
-                            Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
+                while (tempoEsperado < 10000) {
+                    if (tabela.getEstado()) {
+                        tabela_string = tabela.get_tabela_string();
+                        sendData = tabela_string.getBytes();
+
+                        for (String ip : vizinhos) {
+                            /* Converte string com o IP do vizinho para formato InetAddress */
+                            try {
+                                IPAddress = InetAddress.getByName(ip);
+                            } catch (UnknownHostException ex) {
+                                Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
+                                continue;
+                            }
+
+                            sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 6000);
+
+                            try {
+                                clientSocket.send(sendPacket);
+                                break;
+                            } catch (IOException ex) {
+                                Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
+                        Thread.sleep(1000);
+                        tempoEsperado += 1000;
                     }
-                    Thread.sleep(1000);
-                    tempoEsperado+=1000;
                 }
             } catch (InterruptedException ex) {
                 Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
+
             }
-
         }
-
     }
 }
