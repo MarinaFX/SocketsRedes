@@ -1,6 +1,5 @@
 package roteador;
 
-
 /**
  * Classe Endereco criada para facilitar o armazenamento das estruturas de dados
  * Contém os atributos da tabela de roteamento específicados no trabalho, sendo eles

@@ -40,7 +40,7 @@ public class TabelaRoteamento {
             if (!isMeuProprioIP(tabelaString)) {
                 if (!verificaRepitidos(end)) {
                     tabelaRoteamento.add(end);
-                    modificada = true;
+                    mudou();
                 }
             }
         } else {
@@ -60,13 +60,18 @@ public class TabelaRoteamento {
         }
     }
 
+    /**
+     * Método para verificar se o próprio ip está presente na tabela recebida
+     * @param tabela
+     * @return
+     */
     private boolean isMeuProprioIP(String tabela) {
         List<Endereco> novaTabela = new ArrayList<>();
-        novaTabela = getTabelaRecebida(tabela);
 
         if (tabela.equals("!"))
             return false;
         else {
+            novaTabela = getTabelaRecebida(tabela);
             for (Endereco end : novaTabela) {
                 try {
                     if (end.getIp().equals(InetAddress.getLocalHost().getHostAddress()))
@@ -112,7 +117,7 @@ public class TabelaRoteamento {
                 if (end.compareTo(end2) > 0) {
                     end.setIpSaida(IPSaida.getHostAddress());
                     tabelaRoteamento.add(end);
-                    modificada = true;
+                    mudou();
                 } else {
                     if (Integer.parseInt(end.getMetrica()) < Integer.parseInt(end2.getMetrica())) {
                         end2.setIpSaida(IPSaida.getHostAddress());
@@ -159,7 +164,7 @@ public class TabelaRoteamento {
      * @return retorna a String no protocolo definido como *ENDERECO_IP;metrica
      */
     public String get_tabela_string() {
-        modificada = false;
+        nMudou();
         String tabela_string;
 
         if (tabelaRoteamento.isEmpty()) {
