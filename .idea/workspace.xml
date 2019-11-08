@@ -2,19 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b07bb25e-bea8-40f5-bca2-3010dbead52e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SocketsRedes/roteador/MessageReceiver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SocketsRedes/roteador/MessageReceiver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IPVizinhos.txt" beforeDir="false" afterPath="$PROJECT_DIR$/IPVizinhos.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SocketsRedes/roteador/MessageSender.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SocketsRedes/roteador/MessageSender.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SocketsRedes/roteador2/Endereco.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SocketsRedes/roteador2/Endereco.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SocketsRedes/roteador2/MessageReceiver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SocketsRedes/roteador2/MessageReceiver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SocketsRedes/roteador2/MessageSender.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SocketsRedes/roteador2/MessageSender.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SocketsRedes/roteador2/TabelaRoteamento.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SocketsRedes/roteador2/TabelaRoteamento.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SocketsRedes/roteador3/Endereco.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SocketsRedes/roteador3/Endereco.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SocketsRedes/roteador3/MessageReceiver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SocketsRedes/roteador3/MessageReceiver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SocketsRedes/roteador3/MessageSender.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SocketsRedes/roteador3/MessageSender.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SocketsRedes/roteador3/TabelaRoteamento.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SocketsRedes/roteador3/TabelaRoteamento.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/roteador/MessageReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/roteador/MessageReceiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/roteador/MessageSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/roteador/MessageSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/roteador/TabelaRoteamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/roteador/TabelaRoteamento.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,71 +17,75 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="126511826">
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="class" value="2" />
-          <entry key="java" value="55" />
-          <entry key="md" value="1" />
-          <entry key="txt" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="CLASS" value="2" />
-          <entry key="JAVA" value="55" />
-          <entry key="Markdown" value="1" />
-          <entry key="PLAIN_TEXT" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="java" value="5328" />
-          <entry key="txt" value="12" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="JAVA" value="5328" />
-          <entry key="PLAIN_TEXT" value="12" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="1" />
-          <entry key="project.open.time.102" value="1" />
-          <entry key="project.open.time.69" value="1" />
-          <entry key="project.opened" value="2" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/roteador2/Roteador.java">
+        <entry file="file://$PROJECT_DIR$/src/roteador/Roteador.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="21" column="32" lean-forward="true" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+            <state relative-caret-position="78">
+              <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IPVizinhos.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="13" selection-start-column="13" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/roteador/TabelaRoteamento.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-229">
+              <caret line="44" column="23" lean-forward="true" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor />
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/roteador/MessageReceiver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="41" column="75" selection-start-line="41" selection-start-column="75" selection-end-line="41" selection-end-column="75" />
+              <folding>
+                <element signature="e#373#374#0" expanded="true" />
+                <element signature="e#399#400#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/roteador/Endereco.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="97">
+              <caret line="40" selection-start-line="40" selection-end-line="40" />
+              <folding>
+                <element signature="e#1458#1459#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/roteador/Roteador.java">
+        <entry file="file://$PROJECT_DIR$/src/roteador/MessageSender.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/roteador3/Roteador.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="20" column="56" lean-forward="true" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
+            <state relative-caret-position="143">
+              <caret line="51" column="96" selection-start-line="51" selection-start-column="96" selection-end-line="51" selection-end-column="96" />
             </state>
           </provider>
         </entry>
@@ -119,27 +117,21 @@
         <option value="$PROJECT_DIR$/src/Roteador3/Roteador.java" />
         <option value="$PROJECT_DIR$/src/Roteador2/Roteador.java" />
         <option value="$PROJECT_DIR$/src/roteador/Roteador.java" />
-        <option value="$PROJECT_DIR$/IPVizinhos.txt" />
         <option value="$PROJECT_DIR$/src/roteador3/MessageSender.java" />
         <option value="$PROJECT_DIR$/src/roteador/Endereco.java" />
-        <option value="$PROJECT_DIR$/src/roteador/TabelaRoteamento.java" />
         <option value="$PROJECT_DIR$/src/roteador2/Endereco.java" />
         <option value="$PROJECT_DIR$/src/roteador3/Endereco.java" />
         <option value="$PROJECT_DIR$/src/roteador3/MessageReceiver.java" />
         <option value="$PROJECT_DIR$/src/roteador2/MessageReceiver.java" />
-        <option value="$PROJECT_DIR$/src/roteador/MessageReceiver.java" />
         <option value="$PROJECT_DIR$/src/roteador2/MessageSender.java" />
-        <option value="$PROJECT_DIR$/src/roteador/MessageSender.java" />
         <option value="$PROJECT_DIR$/IPVizinhos2.txt" />
         <option value="$PROJECT_DIR$/src/roteador2/Roteador.java" />
+        <option value="$PROJECT_DIR$/IPVizinhos.txt" />
+        <option value="$PROJECT_DIR$/src/roteador/TabelaRoteamento.java" />
+        <option value="$PROJECT_DIR$/src/roteador/MessageReceiver.java" />
+        <option value="$PROJECT_DIR$/src/roteador/MessageSender.java" />
       </list>
     </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
@@ -154,8 +146,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -174,28 +164,18 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="roteador" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="SocketsRedes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SocketsRedes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="roteador2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SocketsRedes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SocketsRedes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="roteador3" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1573108466804" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1573248162563" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -329,13 +309,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32036000" />
+    <option name="totallyTimeSpent" value="34983000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18443497" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13388805" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -346,7 +326,7 @@
       <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.329718" />
-      <window_info anchor="bottom" x="-1366" y="324" width="1366" height="705" id="Debug" order="3" type="WINDOWED" weight="0.4454365" />
+      <window_info anchor="bottom" x="262" y="102" width="842" height="524" id="Debug" order="3" weight="0.44517186" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -354,7 +334,7 @@
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Messages" order="10" />
-      <window_info anchor="bottom" x="-1366" y="324" width="1366" height="705" id="Run" order="11" type="WINDOWED" visible="true" weight="0.29563493" />
+      <window_info active="true" anchor="bottom" x="0" y="23" width="1366" height="705" id="Run" order="11" type="WINDOWED" visible="true" weight="0.29563493" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -370,9 +350,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -409,27 +386,8 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/net/DatagramSocket.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/lang/Thread.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/util/ArrayList.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_111/jre/lib/rt.jar!/java/net/InetSocketAddress.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="27" column="16" lean-forward="true" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_111/jre/lib/rt.jar!/java/net/DualStackPlainDatagramSocketImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="230" column="1" lean-forward="true" selection-start-line="230" selection-start-column="1" selection-end-line="230" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IPVizinhos.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="9" selection-start-column="9" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_111/jre/lib/rt.jar!/java/net/InetSocketAddress.class" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_111/jre/lib/rt.jar!/java/net/DualStackPlainDatagramSocketImpl.class" />
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
@@ -438,89 +396,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Roteador3/TabelaRoteamento.java" />
+    <entry file="file://$PROJECT_DIR$/src/Roteador3/Endereco.java" />
+    <entry file="file://$PROJECT_DIR$/src/Roteador3/MessageSender.java" />
+    <entry file="file://$PROJECT_DIR$/src/Roteador2/MessageSender.java" />
+    <entry file="file://$PROJECT_DIR$/src/Roteador3/MessageReceiver.java" />
+    <entry file="file://$PROJECT_DIR$/src/Roteador2/Endereco.java" />
+    <entry file="file://$PROJECT_DIR$/src/Roteador2/MessageReceiver.java" />
+    <entry file="file://$PROJECT_DIR$/src/Roteador2/TabelaRoteamento.java" />
+    <entry file="file://$PROJECT_DIR$/IPVizinhos2.txt" />
+    <entry file="file://$PROJECT_DIR$/src/Roteador2/Roteador.java" />
+    <entry file="file://$PROJECT_DIR$/src/Roteador3/Roteador.java" />
+    <entry file="file://$PROJECT_DIR$/IPVizinhos.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/roteador/Roteador.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/roteador/Endereco.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="56" column="7" lean-forward="true" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="7" />
+        <state relative-caret-position="97">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+          <folding>
+            <element signature="e#1458#1459#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/roteador/TabelaRoteamento.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2640">
-          <caret line="135" lean-forward="true" selection-start-line="135" selection-end-line="135" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/roteador3/TabelaRoteamento.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/roteador3/Endereco.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/roteador3/MessageSender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-280">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/roteador2/MessageSender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-20">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/roteador3/MessageReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/roteador2/Endereco.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/roteador2/MessageReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/roteador2/TabelaRoteamento.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IPVizinhos2.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="12" lean-forward="true" selection-start-column="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/roteador/MessageSender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="83" column="33" selection-start-line="83" selection-start-column="33" selection-end-line="83" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-229">
+          <caret line="44" column="23" lean-forward="true" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/roteador/MessageReceiver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="255">
+          <caret line="41" column="75" selection-start-line="41" selection-start-column="75" selection-end-line="41" selection-end-column="75" />
           <folding>
             <element signature="e#373#374#0" expanded="true" />
             <element signature="e#399#400#0" expanded="true" />
@@ -528,24 +449,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/roteador2/Roteador.java">
+    <entry file="file://$PROJECT_DIR$/src/roteador/MessageSender.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="21" column="32" lean-forward="true" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/roteador3/Roteador.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="20" column="56" lean-forward="true" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/roteador/Roteador.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        <state relative-caret-position="143">
+          <caret line="51" column="96" selection-start-line="51" selection-start-column="96" selection-end-line="51" selection-end-column="96" />
         </state>
       </provider>
     </entry>
@@ -589,7 +496,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.8</last-edited>
+          <last-edited>1.8.0_191</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

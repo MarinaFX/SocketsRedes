@@ -58,7 +58,7 @@ public class Endereco implements Comparable{
     @Override
     public int compareTo(Object o) {
         if (o instanceof Endereco){
-            if (o.toString().equals(this.toString())){
+            if (((Endereco) o).getIp().equals(this.getIp())){
                 return 1;
             }
             else {

@@ -39,6 +39,7 @@ public class MessageReceiver implements Runnable{
 
             try {
                 /* Aguarda o recebimento de uma mensagem */
+                System.out.println("Aguardando recebimento de datagramas!\n");
                 serverSocket.receive(receivePacket);
             } catch (IOException ex) {
                 Logger.getLogger(MessageReceiver.class.getName()).log(Level.SEVERE, null, ex);
