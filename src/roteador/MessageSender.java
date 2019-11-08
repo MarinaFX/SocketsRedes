@@ -80,7 +80,7 @@ public class MessageSender implements Runnable {
                                 continue;
                             }
 
-                            sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 6000);
+                            sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 5000);
 
                             try {
                                 clientSocket.send(sendPacket);

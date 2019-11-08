@@ -29,12 +29,16 @@ public class TabelaRoteamento {
         String tabelaString;
         tabelaString = tabela_s.trim();
 
+        System.out.println("IP vizinho | tabela recebida ");
+        System.out.println(IPAddress.getHostAddress() + " | " + tabela_s);
+        System.out.println();
+
         if (tabelaString.equals("!")) {
             Endereco end = new Endereco(IPAddress.getHostAddress(), "1");
             end.setIpSaida(IPAddress.getHostAddress());
 
-            if (!isMeuProprioIP(tabela_s)){
-                if (!verificaRepitidos(end)){
+            if (!isMeuProprioIP(tabelaString)) {
+                if (!verificaRepitidos(end)) {
                     tabelaRoteamento.add(end);
                     modificada = true;
                 }
@@ -45,17 +49,13 @@ public class TabelaRoteamento {
         }
 
         mostraTabela();
-
-        System.out.println("IP vizinho | tabela recebida ");
-        System.out.println(IPAddress.getHostAddress() + " | " + tabela_s);
-        System.out.println();
     }
 
-    private void mostraTabela(){
+    private void mostraTabela() {
         System.out.println("Tabela de roteamento atualizada");
         System.out.println("IP ; metrica");
         System.out.println();
-        for(Endereco end : tabelaRoteamento){
+        for (Endereco end : tabelaRoteamento) {
             System.out.println(end.toString());
         }
     }
@@ -64,12 +64,16 @@ public class TabelaRoteamento {
         List<Endereco> novaTabela = new ArrayList<>();
         novaTabela = getTabelaRecebida(tabela);
 
-        for (Endereco end : novaTabela) {
-            try {
-                if (end.getIp().equals(InetAddress.getLocalHost().getHostAddress()))
-                    return true;
-            } catch (UnknownHostException e) {
-                e.printStackTrace();
+        if (tabela.equals("!"))
+            return false;
+        else {
+            for (Endereco end : novaTabela) {
+                try {
+                    if (end.getIp().equals(InetAddress.getLocalHost().getHostAddress()))
+                        return true;
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -156,13 +160,15 @@ public class TabelaRoteamento {
      */
     public String get_tabela_string() {
         modificada = false;
-        String tabela_string = "";
+        String tabela_string;
 
         if (tabelaRoteamento.isEmpty()) {
             /* Tabela de roteamento vazia conforme especificado no protocolo */
+            System.out.println("A tabela de roteamento está vazia \n");
             tabela_string = "!";
         } else {
             /* Converta a tabela de rotamento para string, conforme formato definido no protocolo . */
+            System.out.println("A tabela de roteamento possui endereços \n");
             StringBuilder sb = new StringBuilder();
 
             for (Endereco end : tabelaRoteamento) {
