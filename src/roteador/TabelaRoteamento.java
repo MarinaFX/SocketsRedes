@@ -10,7 +10,7 @@ public class TabelaRoteamento {
     /*Implemente uma estrutura de dados para manter a tabela de roteamento.
      * A tabela deve possuir: IP Destino, Métrica e IP de Saída.
      */
-    private List<Endereco> tabelaRoteamento;
+    private final List<Endereco> tabelaRoteamento;
     private boolean modificada;
 
     public TabelaRoteamento() {
@@ -29,26 +29,37 @@ public class TabelaRoteamento {
         String tabelaString;
         tabelaString = tabela_s.trim();
 
-        System.out.println("IP vizinho | tabela recebida ");
+        System.out.println("IP vizinho \t  | tabela recebida ");
         System.out.println(IPAddress.getHostAddress() + " | " + tabela_s);
         System.out.println();
 
-        if (tabelaString.equals("!")) {
-            Endereco end = new Endereco(IPAddress.getHostAddress(), "1");
-            end.setIpSaida(IPAddress.getHostAddress());
+        Endereco end;
+        end = new Endereco(IPAddress.getHostAddress(), "1");
+        end.setIpSaida(IPAddress.getHostAddress());
 
+        if (tabelaString.equals("!")) {
             if (!isMeuProprioIP(tabelaString)) {
-                if (!verificaRepitidos(end)) {
+                if (verificaRepitidos(end)) {
                     tabelaRoteamento.add(end);
                     mudou();
                 }
             }
         } else {
+            end = new Endereco(IPAddress.getHostAddress(), "1");
+            end.setIpSaida(IPAddress.getHostAddress());
+
+            //if (!isMeuProprioIP(tabelaString)) {
+                if (verificaRepitidos(end)) {
+                    tabelaRoteamento.add(end);
+                    mudou();
+                }
+            //}
             List<Endereco> tabelaRecebida = getTabelaRecebida(tabelaString);
             addNovasRotas(tabelaRecebida, IPAddress);
         }
 
         mostraTabela();
+
     }
 
     private void mostraTabela() {
@@ -62,6 +73,7 @@ public class TabelaRoteamento {
 
     /**
      * Método para verificar se o próprio ip está presente na tabela recebida
+     *
      * @param tabela
      * @return
      */
@@ -95,14 +107,14 @@ public class TabelaRoteamento {
         for (Endereco end : tabelaRoteamento) {
             try {
                 if (end.compareTo(endereco) > 0) {
-                    return true;
+                    return false;
                 }
             } catch (IllegalArgumentException f) {
                 System.out.println(Arrays.toString(f.getStackTrace()) + "\nError: " + f.getMessage());
             }
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -111,16 +123,21 @@ public class TabelaRoteamento {
      * @param tabelaRecebida Lista do tipo Endereco com endereços da tabela_s recebida no update_tabela()
      * @param IPSaida        IP recebido no update_tabela()
      */
-    public void addNovasRotas(List<Endereco> tabelaRecebida, InetAddress IPSaida) {
+    public synchronized void addNovasRotas(List<Endereco> tabelaRecebida, InetAddress IPSaida) {
         for (Endereco end : tabelaRecebida) {
-            for (Endereco end2 : tabelaRoteamento) {
-                if (end.compareTo(end2) > 0) {
-                    end.setIpSaida(IPSaida.getHostAddress());
-                    tabelaRoteamento.add(end);
-                    mudou();
-                } else {
-                    if (Integer.parseInt(end.getMetrica()) < Integer.parseInt(end2.getMetrica())) {
-                        end2.setIpSaida(IPSaida.getHostAddress());
+            if (!tabelaRoteamento.isEmpty()){
+                synchronized (tabelaRoteamento){
+                    for (Endereco end2 : tabelaRoteamento) {
+                        if (end.compareTo(end2) < 0) {
+                            end.setIpSaida(IPSaida.getHostAddress());
+                            tabelaRoteamento.add(end);
+                            mudou();
+                        } else {
+                            if (Integer.parseInt(end.getMetrica()) < Integer.parseInt(end2.getMetrica())) {
+                                end.setIpSaida(IPSaida.getHostAddress());
+                                end.incrementaMetrica();
+                            }
+                        }
                     }
                 }
             }
