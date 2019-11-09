@@ -10,7 +10,7 @@ public class TabelaRoteamento {
     /*Implemente uma estrutura de dados para manter a tabela de roteamento.
      * A tabela deve possuir: IP Destino, Métrica e IP de Saída.
      */
-    private final List<Endereco> tabelaRoteamento;
+    private List<Endereco> tabelaRoteamento;
     private boolean modificada;
 
     public TabelaRoteamento() {
@@ -29,51 +29,39 @@ public class TabelaRoteamento {
         String tabelaString;
         tabelaString = tabela_s.trim();
 
-        System.out.println("IP vizinho \t  | tabela recebida ");
-        System.out.println(IPAddress.getHostAddress() + " | " + tabela_s);
-        System.out.println();
-
-        Endereco end;
-        end = new Endereco(IPAddress.getHostAddress(), "1");
-        end.setIpSaida(IPAddress.getHostAddress());
-
         if (tabelaString.equals("!")) {
-            if (!isMeuProprioIP(tabelaString)) {
-                if (verificaRepitidos(end)) {
+            Endereco end = new Endereco(IPAddress.getHostAddress(), "1");
+            end.setIpSaida(IPAddress.getHostAddress());
+
+            if (!isMeuProprioIP(tabela_s)){
+                if (!verificaRepitidos(end)){
                     tabelaRoteamento.add(end);
                     mudou();
                 }
             }
         } else {
-            end = new Endereco(IPAddress.getHostAddress(), "1");
-            end.setIpSaida(IPAddress.getHostAddress());
-
-            //if (!isMeuProprioIP(tabelaString)) {
-                if (verificaRepitidos(end)) {
-                    tabelaRoteamento.add(end);
-                    mudou();
-                }
-            //}
             List<Endereco> tabelaRecebida = getTabelaRecebida(tabelaString);
             addNovasRotas(tabelaRecebida, IPAddress);
         }
 
         mostraTabela();
 
+        System.out.println("IP vizinho | tabela recebida ");
+        System.out.println(IPAddress.getHostAddress() + " | " + tabela_s);
+        System.out.println();
     }
 
-    private void mostraTabela() {
+    private void mostraTabela(){
         System.out.println("Tabela de roteamento atualizada");
         System.out.println("IP ; metrica");
         System.out.println();
-        for (Endereco end : tabelaRoteamento) {
+        for(Endereco end : tabelaRoteamento){
             System.out.println(end.toString());
         }
     }
 
     /**
      * Método para verificar se o próprio ip está presente na tabela recebida
-     *
      * @param tabela
      * @return
      */
@@ -107,14 +95,14 @@ public class TabelaRoteamento {
         for (Endereco end : tabelaRoteamento) {
             try {
                 if (end.compareTo(endereco) > 0) {
-                    return false;
+                    return true;
                 }
             } catch (IllegalArgumentException f) {
                 System.out.println(Arrays.toString(f.getStackTrace()) + "\nError: " + f.getMessage());
             }
         }
 
-        return true;
+        return false;
     }
 
     /**
@@ -123,21 +111,16 @@ public class TabelaRoteamento {
      * @param tabelaRecebida Lista do tipo Endereco com endereços da tabela_s recebida no update_tabela()
      * @param IPSaida        IP recebido no update_tabela()
      */
-    public synchronized void addNovasRotas(List<Endereco> tabelaRecebida, InetAddress IPSaida) {
+    public void addNovasRotas(List<Endereco> tabelaRecebida, InetAddress IPSaida) {
         for (Endereco end : tabelaRecebida) {
-            if (!tabelaRoteamento.isEmpty()){
-                synchronized (tabelaRoteamento){
-                    for (Endereco end2 : tabelaRoteamento) {
-                        if (end.compareTo(end2) < 0) {
-                            end.setIpSaida(IPSaida.getHostAddress());
-                            tabelaRoteamento.add(end);
-                            mudou();
-                        } else {
-                            if (Integer.parseInt(end.getMetrica()) < Integer.parseInt(end2.getMetrica())) {
-                                end.setIpSaida(IPSaida.getHostAddress());
-                                end.incrementaMetrica();
-                            }
-                        }
+            for (Endereco end2 : tabelaRoteamento) {
+                if (end.compareTo(end2) > 0) {
+                    end.setIpSaida(IPSaida.getHostAddress());
+                    tabelaRoteamento.add(end);
+                    mudou();
+                } else {
+                    if (Integer.parseInt(end.getMetrica()) < Integer.parseInt(end2.getMetrica())) {
+                        end2.setIpSaida(IPSaida.getHostAddress());
                     }
                 }
             }
@@ -186,11 +169,9 @@ public class TabelaRoteamento {
 
         if (tabelaRoteamento.isEmpty()) {
             /* Tabela de roteamento vazia conforme especificado no protocolo */
-            System.out.println("A tabela de roteamento está vazia \n");
             tabela_string = "!";
         } else {
             /* Converta a tabela de rotamento para string, conforme formato definido no protocolo . */
-            System.out.println("A tabela de roteamento possui endereços \n");
             StringBuilder sb = new StringBuilder();
 
             for (Endereco end : tabelaRoteamento) {
