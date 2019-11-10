@@ -22,9 +22,9 @@ public class MessageReceiver implements Runnable{
         try {
 
             /* Inicializa o servidor para aguardar datagramas na porta 5000 */
-            System.out.println("Server socket 5000");
-
             serverSocket = new DatagramSocket(5000);
+            System.out.println("Server socket " + serverSocket.getLocalPort());
+
         } catch (SocketException ex) {
             Logger.getLogger(MessageReceiver.class.getName()).log(Level.SEVERE, null, ex);
             return;
@@ -41,6 +41,7 @@ public class MessageReceiver implements Runnable{
                 /* Aguarda o recebimento de uma mensagem */
                 System.out.println("Aguardando recebimento de datagramas!\n");
                 serverSocket.receive(receivePacket);
+                System.out.println("Datagrama recebido de: " + receivePacket.getAddress().getHostAddress() + ":" + receivePacket.getPort() + "\n");
             } catch (IOException ex) {
                 Logger.getLogger(MessageReceiver.class.getName()).log(Level.SEVERE, null, ex);
             }

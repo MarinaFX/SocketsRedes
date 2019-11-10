@@ -49,8 +49,9 @@ public class MessageSender implements Runnable {
                 }
 
                 /* Configura pacote para envio da menssagem para o roteador vizinho na porta 5000*/
-                System.out.println("Enviando datagrama para " + IPAddress.getHostAddress() + "\n");
-                sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 5000);
+                sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 6000);
+                System.out.println("Enviando datagrama para " + IPAddress.getHostAddress() + ":" + sendPacket.getPort());
+
 
                 /* Realiza envio da mensagem. */
                 try {
@@ -68,6 +69,7 @@ public class MessageSender implements Runnable {
                 int tempoEsperado = 0;
                 while (tempoEsperado < 10000) {
                     if (tabela.getEstado()) {
+                        System.out.println("Ora ora, tivemos uma atualização na tabela!");
                         tabela_string = tabela.get_tabela_string();
                         sendData = tabela_string.getBytes();
 
@@ -80,18 +82,19 @@ public class MessageSender implements Runnable {
                                 continue;
                             }
 
-                            sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 5000);
+                            sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 6000);
+                            System.out.println("Enviando datagrama para " + IPAddress.getHostAddress() + ":" + sendPacket.getPort() + "\n");
 
                             try {
                                 clientSocket.send(sendPacket);
-                                break;
                             } catch (IOException ex) {
                                 Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
-                        Thread.sleep(1000);
-                        tempoEsperado += 1000;
+                        break;
                     }
+                    tempoEsperado += 1000;
+                    Thread.sleep(1000);
                 }
             } catch (InterruptedException ex) {
                 Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);

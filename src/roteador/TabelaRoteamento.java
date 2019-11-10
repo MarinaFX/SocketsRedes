@@ -33,7 +33,7 @@ public class TabelaRoteamento {
             Endereco end = new Endereco(IPAddress.getHostAddress(), "1");
             end.setIpSaida(IPAddress.getHostAddress());
 
-            if (!isMeuProprioIP(tabela_s)){
+            if (!isMeuProprioIP(tabelaString)){
                 if (!verificaRepitidos(end)){
                     tabelaRoteamento.add(end);
                     mudou();
@@ -44,20 +44,23 @@ public class TabelaRoteamento {
             addNovasRotas(tabelaRecebida, IPAddress);
         }
 
-        mostraTabela();
-
         System.out.println("IP vizinho | tabela recebida ");
         System.out.println(IPAddress.getHostAddress() + " | " + tabela_s);
         System.out.println();
+
+        mostraTabela();
     }
 
     private void mostraTabela(){
-        System.out.println("Tabela de roteamento atualizada");
-        System.out.println("IP ; metrica");
-        System.out.println();
+        System.out.println("==============================");
+        System.out.println(" \t Tabela de roteamento \t ");
+        System.out.println(" \t IP \t;\t metrica \t ");
         for(Endereco end : tabelaRoteamento){
-            System.out.println(end.toString());
+            System.out.println(" \t " + end.toString() + "\t\t\t ");
         }
+
+        System.out.println("==============================");
+        System.out.println();
     }
 
     /**
