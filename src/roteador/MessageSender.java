@@ -69,7 +69,7 @@ public class MessageSender implements Runnable {
                 }
 
                 /* Configura pacote para envio da menssagem para o roteador vizinho na porta 5000*/
-                sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 6000);
+                sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 5000);
                 System.out.println("Enviando datagrama para " + IPAddress.getHostAddress() + ":" + sendPacket.getPort());
 
 
@@ -119,7 +119,7 @@ public class MessageSender implements Runnable {
                                 continue;
                             }
 
-                            sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 6000);
+                            sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 5000);
                             System.out.println("Enviando datagrama para " + IPAddress.getHostAddress() + ":" + sendPacket.getPort() + "\n");
 
                             try {

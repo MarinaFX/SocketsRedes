@@ -135,12 +135,6 @@ public class TabelaRoteamento {
      * @param IPSaida        IP recebido no update_tabela()
      */
     public void addNovasRotas(List<Endereco> tabelaRecebida, InetAddress IPSaida) {
-        try {
-            semaphore.acquire();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         if (tabelaRoteamento.isEmpty()) {
             for (Endereco end : tabelaRecebida){
                 if ((!verificaRepitidos(end)) && (!isMeuProprioIP(end))){
@@ -165,8 +159,6 @@ public class TabelaRoteamento {
                 }
             }
         }
-
-        semaphore.release();
     }
 
     /**
@@ -206,12 +198,6 @@ public class TabelaRoteamento {
      * @return retorna a String no protocolo definido como *ENDERECO_IP;metrica
      */
     public String get_tabela_string() {
-        try {
-            semaphore.acquire();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         nMudou();
         String tabela_string;
 
@@ -227,8 +213,6 @@ public class TabelaRoteamento {
             }
             tabela_string = sb.toString();
         }
-
-        semaphore.release();
         return tabela_string;
     }
 
