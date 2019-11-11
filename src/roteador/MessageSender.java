@@ -3,22 +3,25 @@ package roteador;
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MessageSender implements Runnable {
     TabelaRoteamento tabela; /*Tabela de roteamento */
     ArrayList<String> vizinhos; /* Lista de IPs dos roteadores vizinhos */
+    private Semaphore semaphore;
 
-    public MessageSender(TabelaRoteamento t, ArrayList<String> v) {
+    public MessageSender(TabelaRoteamento t, ArrayList<String> v, Semaphore semaphore) {
         tabela = t;
         vizinhos = v;
+        this.semaphore = semaphore;
     }
 
     @Override
     public void run() {
         DatagramSocket clientSocket = null;
-        byte[] sendData;
+        byte[] sendData = new byte[0];
         InetAddress IPAddress = null;
         DatagramPacket sendPacket = null;
 
@@ -31,12 +34,29 @@ public class MessageSender implements Runnable {
         }
 
         while (true) {
-
+            String tabela_string;
             /* Pega a tabela de roteamento no formato string, conforme especificado pelo protocolo. */
-            String tabela_string = tabela.get_tabela_string();
-
             /* Converte string para array de bytes para envio pelo socket. */
-            sendData = tabela_string.getBytes();
+
+            boolean semaforoNaoAbriu = true;
+            while (semaforoNaoAbriu){
+                if (semaphore.tryAcquire()) {
+                    try {
+                        semaphore.release();
+                        semaphore.acquire();
+                        System.out.println("Sinaleira abriu!");
+                        tabela_string = tabela.get_tabela_string();
+                        sendData = tabela_string.getBytes();
+                        semaphore.release();
+                        semaforoNaoAbriu = false;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+                    System.out.println("Aguardando a sinaleira abrir!");
+                }
+            }
 
             /* Anuncia a tabela de roteamento para cada um dos vizinhos */
             for (String ip : vizinhos) {
@@ -70,8 +90,25 @@ public class MessageSender implements Runnable {
                 while (tempoEsperado < 10000) {
                     if (tabela.getEstado()) {
                         System.out.println("Ora ora, tivemos uma atualização na tabela!");
-                        tabela_string = tabela.get_tabela_string();
-                        sendData = tabela_string.getBytes();
+                        semaforoNaoAbriu = true;
+                        while (semaforoNaoAbriu){
+                            if (semaphore.tryAcquire()) {
+                                try {
+                                    semaphore.release();
+                                    semaphore.acquire();
+                                    System.out.println("Sinaleira aberta!");
+                                    tabela_string = tabela.get_tabela_string();
+                                    sendData = tabela_string.getBytes();
+                                    semaphore.release();
+                                    semaforoNaoAbriu = false;
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            else {
+                                System.out.println("Aguardando a sinaleira abrir!");
+                            }
+                        }
 
                         for (String ip : vizinhos) {
                             /* Converte string com o IP do vizinho para formato InetAddress */
@@ -98,7 +135,6 @@ public class MessageSender implements Runnable {
                 }
             } catch (InterruptedException ex) {
                 Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
-
             }
         }
     }

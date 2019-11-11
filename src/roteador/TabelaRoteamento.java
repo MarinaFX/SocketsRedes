@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 public class TabelaRoteamento {
     /*Implemente uma estrutura de dados para manter a tabela de roteamento.
@@ -12,10 +13,12 @@ public class TabelaRoteamento {
      */
     private List<Endereco> tabelaRoteamento;
     private boolean modificada;
+    private Semaphore semaphore;
 
-    public TabelaRoteamento() {
+    public TabelaRoteamento(Semaphore semaphore) {
         tabelaRoteamento = new ArrayList<>();
         modificada = false;
+        this.semaphore = semaphore;
     }
 
     /**
@@ -33,8 +36,8 @@ public class TabelaRoteamento {
             Endereco end = new Endereco(IPAddress.getHostAddress(), "1");
             end.setIpSaida(IPAddress.getHostAddress());
 
-            if (!isMeuProprioIP(tabelaString)){
-                if (!verificaRepitidos(end)){
+            if (!isMeuProprioIP(tabelaString)) {
+                if (!verificaRepitidos(end)) {
                     tabelaRoteamento.add(end);
                     mudou();
                 }
@@ -51,11 +54,11 @@ public class TabelaRoteamento {
         mostraTabela();
     }
 
-    private void mostraTabela(){
+    private void mostraTabela() {
         System.out.println("==============================");
         System.out.println(" \t Tabela de roteamento \t ");
         System.out.println(" \t IP \t;\t metrica \t ");
-        for(Endereco end : tabelaRoteamento){
+        for (Endereco end : tabelaRoteamento) {
             System.out.println(" \t " + end.toString() + "\t\t\t ");
         }
 
@@ -65,8 +68,9 @@ public class TabelaRoteamento {
 
     /**
      * Método para verificar se o próprio ip está presente na tabela recebida
-     * @param tabela
-     * @return
+     *
+     * @param tabela String da tabela recebida do vizinho
+     * @return se é o próprio IP = true; se não é o próprio IP = false;
      */
     private boolean isMeuProprioIP(String tabela) {
         List<Endereco> novaTabela = new ArrayList<>();
@@ -83,6 +87,22 @@ public class TabelaRoteamento {
                     e.printStackTrace();
                 }
             }
+        }
+
+        return false;
+    }
+
+    private boolean isMeuProprioIP(Endereco end) {
+        if (end == null)
+            return false;
+        else {
+            try {
+                if (end.getIp().equals(InetAddress.getLocalHost().getHostAddress()))
+                    return true;
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
+
         }
 
         return false;
@@ -115,19 +135,38 @@ public class TabelaRoteamento {
      * @param IPSaida        IP recebido no update_tabela()
      */
     public void addNovasRotas(List<Endereco> tabelaRecebida, InetAddress IPSaida) {
-        for (Endereco end : tabelaRecebida) {
-            for (Endereco end2 : tabelaRoteamento) {
-                if (end.compareTo(end2) > 0) {
+        try {
+            semaphore.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (tabelaRoteamento.isEmpty()) {
+            for (Endereco end : tabelaRecebida){
+                if ((!verificaRepitidos(end)) && (!isMeuProprioIP(end))){
                     end.setIpSaida(IPSaida.getHostAddress());
                     tabelaRoteamento.add(end);
                     mudou();
-                } else {
-                    if (Integer.parseInt(end.getMetrica()) < Integer.parseInt(end2.getMetrica())) {
-                        end2.setIpSaida(IPSaida.getHostAddress());
+                }
+            }
+        } else {
+            for (Endereco end : tabelaRecebida) {
+                for (Endereco end2 : tabelaRoteamento) {
+                    if ((end.compareTo(end2) < 0) && (!isMeuProprioIP(end))) {
+                        end.setIpSaida(IPSaida.getHostAddress());
+                        tabelaRoteamento.add(end);
+                        mudou();
+                    } else {
+                        if (Integer.parseInt(end.getMetrica()) < Integer.parseInt(end2.getMetrica())) {
+                            end.setIpSaida(IPSaida.getHostAddress());
+                            end.incrementaMetrica();
+                        }
                     }
                 }
             }
         }
+
+        semaphore.release();
     }
 
     /**
@@ -167,6 +206,12 @@ public class TabelaRoteamento {
      * @return retorna a String no protocolo definido como *ENDERECO_IP;metrica
      */
     public String get_tabela_string() {
+        try {
+            semaphore.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         nMudou();
         String tabela_string;
 
@@ -183,6 +228,7 @@ public class TabelaRoteamento {
             tabela_string = sb.toString();
         }
 
+        semaphore.release();
         return tabela_string;
     }
 

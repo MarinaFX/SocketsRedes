@@ -5,14 +5,17 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MessageReceiver implements Runnable{
     private TabelaRoteamento tabela;
+    private Semaphore semaphore;
 
-    public MessageReceiver(TabelaRoteamento t){
+    public MessageReceiver(TabelaRoteamento t, Semaphore semaphore){
         tabela = t;
+        this.semaphore = semaphore;
     }
 
     @Override
@@ -52,7 +55,24 @@ public class MessageReceiver implements Runnable{
             /* Obtem o IP de origem da mensagem */
             InetAddress IPAddress = receivePacket.getAddress();
 
-            tabela.update_tabela(tabela_string, IPAddress);
+            boolean sinaleiraNaoAbriu = true;
+            while (sinaleiraNaoAbriu){
+                if (semaphore.tryAcquire()){
+                    try {
+                        semaphore.release();
+                        semaphore.acquire();
+                        System.out.println("Sinaleira abriu!");
+                        tabela.update_tabela(tabela_string, IPAddress);
+                        semaphore.release();
+                        sinaleiraNaoAbriu = false;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+                    System.out.println("Aguardando a sinaleira abrir!");
+                }
+            }
         }
     }
 }
