@@ -10,19 +10,19 @@ Este trabalho consiste na implementação de Sockets UDP, no qual foi necessári
 
 Primeiramente, para a implementação do roteador partimos do código fonte disponibilizado no moodle pela professora. Assim, a partir dele começamos as adições e alterações do código. Abaixo, segue uma tabela com os métodos alterados e os que foram adicionados ao código: 
 
-Método 					   | 		             Alterado 	          		| 			        Adicionado
----------------------------------------- | ---------------------------------------- | ----------------------------------------
-+ update_tabela(String  tabela_s, InetAddress  IPAddress) : void				         | ✔️ | ❌
-+ get_tabela_string() : String													                         | ✔️ | ❌
-- mostraTabela() : void															                             | ❌ | ✔️
-- isMeuProprioIP(String  tabela) : boolean							          			         | ❌ | ✔️
-- isMeuProprioIP(Endereco end) : boolean									            	         | ❌ | ✔️
-- verificaRepitidos(Endereco  endereco) : boolean							        	         | ❌ | ✔️
+Método 					   | 		 Alterado 			| 			Adicionado
+-------------------------- | -------------------------- | --------------------------
++ update_tabela(String  tabela_s, InetAddress  IPAddress) : void				   | ✔️ | ❌
++ get_tabela_string() : String													   | ✔️ | ❌
+- mostraTabela() : void															   | ❌ | ✔️
+- isMeuProprioIP(String  tabela) : boolean										   | ❌ | ✔️
+- isMeuProprioIP(Endereco end) : boolean										   | ❌ | ✔️
+- verificaRepitidos(Endereco  endereco) : boolean								   | ❌ | ✔️
 + addNovasRotas(List`<Endereco>` tabelaRecebida, InetAddress  IPSaida) : void	   | ❌ | ✔️
-+ getTabelaRecebida(String  tabela_s) : List`<Endereco>`						             | ❌ | ✔️
-+ mudou() : void																                                 | ❌ | ✔️
-+ nMudou(): void																                                 | ❌ | ✔️
-+ getEstado() : boolean														                           	   | ❌ | ✔️
++ getTabelaRecebida(String  tabela_s) : List`<Endereco>`						   | ❌ | ✔️
++ mudou() : void																   | ❌ | ✔️
++ nMudou(): void																   | ❌ | ✔️
++ getEstado() : boolean															   | ❌ | ✔️
 
 
 O código fonte entregue está comentado, explicando o escopo e função de cada método. Portanto, iremos mostrar nesse relatório mais sobre nossa experiência com a produção do trabalho e o que passamos para chegar no final dele. 
