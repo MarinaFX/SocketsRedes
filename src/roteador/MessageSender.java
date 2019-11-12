@@ -38,24 +38,14 @@ public class MessageSender implements Runnable {
             /* Pega a tabela de roteamento no formato string, conforme especificado pelo protocolo. */
             /* Converte string para array de bytes para envio pelo socket. */
 
-            boolean semaforoNaoAbriu = true;
-            while (semaforoNaoAbriu){
-                if (semaphore.tryAcquire()) {
-                    try {
-                        semaphore.release();
-                        semaphore.acquire();
-                        System.out.println("Sinaleira abriu!");
-                        tabela_string = tabela.get_tabela_string();
-                        sendData = tabela_string.getBytes();
-                        semaphore.release();
-                        semaforoNaoAbriu = false;
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                else {
-                    System.out.println("Aguardando a sinaleira abrir!");
-                }
+            try {
+                semaphore.acquire();
+                System.out.println("Sinaleira abriu para o " + this.getClass().getName());
+                tabela_string = tabela.get_tabela_string();
+                sendData = tabela_string.getBytes();
+                semaphore.release();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
             /* Anuncia a tabela de roteamento para cada um dos vizinhos */
@@ -69,7 +59,7 @@ public class MessageSender implements Runnable {
                 }
 
                 /* Configura pacote para envio da menssagem para o roteador vizinho na porta 5000*/
-                sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 5000);
+                sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 6000);
                 System.out.println("Enviando datagrama para " + IPAddress.getHostAddress() + ":" + sendPacket.getPort());
 
 
@@ -90,24 +80,15 @@ public class MessageSender implements Runnable {
                 while (tempoEsperado < 10000) {
                     if (tabela.getEstado()) {
                         System.out.println("Ora ora, tivemos uma atualização na tabela!");
-                        semaforoNaoAbriu = true;
-                        while (semaforoNaoAbriu){
-                            if (semaphore.tryAcquire()) {
-                                try {
-                                    semaphore.release();
-                                    semaphore.acquire();
-                                    System.out.println("Sinaleira aberta!");
-                                    tabela_string = tabela.get_tabela_string();
-                                    sendData = tabela_string.getBytes();
-                                    semaphore.release();
-                                    semaforoNaoAbriu = false;
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                            else {
-                                System.out.println("Aguardando a sinaleira abrir!");
-                            }
+
+                        try {
+                            semaphore.acquire();
+                            System.out.println("Sinaleira aberta para " + this.getClass().getName());
+                            tabela_string = tabela.get_tabela_string();
+                            sendData = tabela_string.getBytes();
+                            semaphore.release();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
 
                         for (String ip : vizinhos) {

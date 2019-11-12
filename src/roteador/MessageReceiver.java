@@ -55,23 +55,13 @@ public class MessageReceiver implements Runnable{
             /* Obtem o IP de origem da mensagem */
             InetAddress IPAddress = receivePacket.getAddress();
 
-            boolean sinaleiraNaoAbriu = true;
-            while (sinaleiraNaoAbriu){
-                if (semaphore.tryAcquire()){
-                    try {
-                        semaphore.release();
-                        semaphore.acquire();
-                        System.out.println("Sinaleira abriu!");
-                        tabela.update_tabela(tabela_string, IPAddress);
-                        semaphore.release();
-                        sinaleiraNaoAbriu = false;
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                else {
-                    System.out.println("Aguardando a sinaleira abrir!");
-                }
+            try {
+                semaphore.acquire();
+                System.out.println("Sinaleira abriu para o " + this.getClass().getName());
+                tabela.update_tabela(tabela_string, IPAddress);
+                semaphore.release();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }

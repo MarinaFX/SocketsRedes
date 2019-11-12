@@ -36,7 +36,7 @@ public class TabelaRoteamento {
             Endereco end = new Endereco(IPAddress.getHostAddress(), "1");
             end.setIpSaida(IPAddress.getHostAddress());
 
-            if (!isMeuProprioIP(tabelaString)) {
+            if (!isMeuProprioIP(end)) {
                 if (!verificaRepitidos(end)) {
                     tabelaRoteamento.add(end);
                     mudou();
@@ -148,6 +148,7 @@ public class TabelaRoteamento {
                 for (Endereco end2 : tabelaRoteamento) {
                     if ((end.compareTo(end2) < 0) && (!isMeuProprioIP(end))) {
                         end.setIpSaida(IPSaida.getHostAddress());
+                        end.incrementaMetrica();
                         tabelaRoteamento.add(end);
                         mudou();
                     } else {
