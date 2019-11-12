@@ -10,7 +10,7 @@ Este trabalho consiste na implementação de Sockets UDP, no qual foi necessári
 
 Primeiramente, para a implementação do roteador partimos do código fonte disponibilizado no moodle pela professora. Assim, a partir dele começamos as adições e alterações do código. Abaixo, segue uma tabela com os métodos alterados e os que foram adicionados ao código: 
 
-                      Método 					   | 		             Alterado 	          		| 			        Adicionado
+Método 					   | 		             Alterado 	          		| 			        Adicionado
 ---------------------------------------- | ---------------------------------------- | ----------------------------------------
 + update_tabela(String  tabela_s, InetAddress  IPAddress) : void				         | ✔️ | ❌
 + get_tabela_string() : String													                         | ✔️ | ❌
